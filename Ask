@@ -25,8 +25,8 @@ public class Ask extends World
      }//end ask 
      public void playAgain()
     {
-           if(againIsNo())
-            againIsNo(againIsNo());
+           if(againIsNo(again))
+            againIsNo(true);
            else 
           {
              Greenfoot.setWorld(new GameScreen());
@@ -44,11 +44,11 @@ public class Ask extends World
 
     }//end ask possibilities
     
-    public boolean againIsNo()
+    public boolean againIsNo(String str)
     {
          for(String no: noPossibilities)
            {
-                  if(again.equalsIgnoreCase(no))
+                  if(str.equalsIgnoreCase(no))
                 {
                     return true;
                 }//end if
