@@ -13,7 +13,7 @@ public class YouLose extends Ask
     public YouLose()
     {
         super();
-        if(againIsNo())
+        if(againIsNo(again))
         {
             betterLuckNextTime();
         }
