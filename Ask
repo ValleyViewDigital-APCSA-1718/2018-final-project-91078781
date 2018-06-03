@@ -1,0 +1,65 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
+/**
+ * Write a description of class Ask here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Ask extends World
+{
+        String again;
+        ArrayList<String> noPossibilities= new ArrayList(4);
+        public Ask()
+    {
+      super(600,600,1);
+       addingPossibilities();
+       ask();
+
+    }//end YouLose constructor
+     public void ask()
+     {
+        again= Greenfoot.ask("TRY AGAIN?");
+     }//end ask 
+     public void playAgain()
+    {
+           if(againIsNo())
+            againIsNo(againIsNo());
+           else 
+          {
+              GameScreen.resetTime();
+             Greenfoot.setWorld(new GameScreen());
+           }
+          
+    }//end playAgain
+    
+    public void addingPossibilities()
+    {
+        noPossibilities.add("no");
+        noPossibilities.add("nope");
+        noPossibilities.add("nah");
+        noPossibilities.add("no thank you");
+        
+
+    }//end ask possibilities
+    
+    public boolean againIsNo()
+    {
+         for(String no: noPossibilities)
+           {
+                  if(again.equalsIgnoreCase(no))
+                {
+                    return true;
+                }
+             
+           }
+           return false;
+    }
+    
+    public void againIsNo(boolean isNo)
+    {
+        if(isNo)
+        Ball.resetRuns();
+        Greenfoot.stop();
+    }
+}//end ask class
