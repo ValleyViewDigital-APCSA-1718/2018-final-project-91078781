@@ -16,7 +16,7 @@ public class YouLose extends Ask
         if(againIsNo())
         {
             betterLuckNextTime();
-        }//end if
+        }
         playAgain();
     }//end YouLose constructor
    
@@ -24,5 +24,6 @@ public class YouLose extends Ask
     {
      GreenfootImage bLNT= new GreenfootImage("Better Luck Next Time", 50, Color.WHITE, Color.BLACK);
      getBackground().drawImage(bLNT,100,500);
-    }/end betterLuckNextTime
+    }
 }//end class YouLose
+
