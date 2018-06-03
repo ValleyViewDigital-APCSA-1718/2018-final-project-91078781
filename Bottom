@@ -1,0 +1,7 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+/**
+ * Bottom class
+ * code is done in Ball class*/
+public class Bottom extends Actor 
+{ 
+}//end Bottom class
