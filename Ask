@@ -1,10 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 /**
- * Write a description of class Ask here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ *Parent class of YouLose and YouWin classes
+ *
+ *  Jaqueline Gomez
+ *  CSA Period 5
+ *  Final Project
+    May 20,2018
  */
 public class Ask extends World
 {
@@ -27,7 +29,6 @@ public class Ask extends World
             againIsNo(againIsNo());
            else 
           {
-              GameScreen.resetTime();
              Greenfoot.setWorld(new GameScreen());
            }
           
@@ -50,16 +51,18 @@ public class Ask extends World
                   if(again.equalsIgnoreCase(no))
                 {
                     return true;
-                }
+                }//end if
              
-           }
+           }//end for
            return false;
-    }
+    }//end againIsNo
     
     public void againIsNo(boolean isNo)
     {
         if(isNo)
-        Ball.resetRuns();
-        Greenfoot.stop();
-    }
+        {
+            Ball.resetRuns();
+           Greenfoot.stop();
+        }
+    }//end againIsNo
 }//end ask class
