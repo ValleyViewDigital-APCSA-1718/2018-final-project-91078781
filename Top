@@ -1,0 +1,7 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+/** object*/
+public class Top extends Actor 
+{
+    
+   
+}//end top class
