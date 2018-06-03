@@ -1,0 +1,106 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+/**
+ * Ball gets rid of obstacles
+ *
+ *  Jaqueline Gomez
+ *  CSA Period 5
+ *  5/20/18
+ */
+public class Ball extends Actor implements touchingBall
+{
+    
+    private static int runs=0;
+    private int moveD=10, turnD= 45;
+    
+    public void act()
+    {
+        firstRun();
+        
+        move(moveD);
+    
+        touchingBoard();
+    
+        touchingBottom();
+    
+        touchingTop();
+        
+        isTouchingEdge();
+        
+        runs++;
+    
+    }//end act
+ 
+    public static int getRuns()
+    {
+        return runs;
+    }//end get runs
+    public static void resetRuns()
+    {
+        runs=0;
+    }//end setRuns()
+    
+    public void isTouchingEdge()
+    {
+        if(this.isAtEdge())
+        {
+            turn(turnD);
+            move(moveD);
+            
+        }
+    }// end method isAtEdge
+ 
+ 
+    public void touchingBoard()
+    {
+    if(this.isTouching(Board.class))
+        {
+        Top top = (Top) getWorld().getObjects(Top.class).get(0); 
+        turnTowards(top.getX(), top.getY()); 
+    
+        moveD=10;
+        turnD=45;
+            move(30);
+        }//end if
+    
+    }//end touchingBoard()
+ 
+  public void touchingBottom()
+  {
+ 
+    if(this.isTouching(Bottom.class))
+        {
+            runs=0;
+            moveD=10;
+
+            Greenfoot.setWorld(new YouLose());
+            
+        }//end if
+        
+  }//end touchingBottom
+ 
+  public void firstRun()
+  {
+        if(runs==0)
+        {
+            move(-30);
+            runs++;
+        }//end if
+ 
+  }//end firstRun method
+ 
+   public void touchingTop()
+  {
+ 
+  	if(this.isTouching(Top.class))
+    	{
+        	Bottom bottom = getWorld().getObjects(Bottom.class).get(0); 
+        	turnTowards(bottom.getX(), bottom.getY());
+        	
+        	turn(25);
+        	
+        	move(10);
+        	moveD=10;
+        	turnD=-45;
+    	}// end if
+  }//end touchingTop
+}//end class Bal
