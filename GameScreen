@@ -3,9 +3,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 /**
  * Screen where game is played (constructs objects in game)
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Jaqueline Gomez
  */
 public class GameScreen extends World
 {
@@ -13,15 +11,26 @@ public class GameScreen extends World
     private static Calendar cal= Calendar.getInstance();
     private static int time= cal.get(Calendar.SECOND);
     private static int level;
-    private String askLevel="1";
+    private String askLevel="Level";
+    ArrayList<Dot> dots;
     Ball ball= new Ball();
     Board board= new Board();
-    Bottom b= new Bottom();
+    Bottom bottom= new Bottom();
+    Middle mid= new Middle();
     Top t= new Top();
-    
+    public void act()
+    {
+     if(Ball.getRuns()==0)
+       {
+           resetTime(); 
+        }//end if
+     cal= Calendar.getInstance();
+      time= cal.get(Calendar.SECOND); 
+    }
     public GameScreen()
      {
-        super(600,600,1);
+        super(600,800,1);
+        
           /** Setting speed*/
           Greenfoot.setSpeed(40);
 
@@ -30,11 +39,12 @@ public class GameScreen extends World
         if(askLevel.indexOf("2")!=-1)
         {
              level=2; 
-         }
+             
+         }//end if
         else
         {
             level=1;
-        }
+        }//end else
             //Dot
             initializeNumDots();
             
@@ -47,25 +57,31 @@ public class GameScreen extends World
             /** add Objects */
         
             //Ball
-            addObject(ball,300,500);
+            addObject(ball,300,700);
             
             //Board
-            addObject(board,300,550);
+            addObject(board,300,750);
             
-            //Bottom/Top line
-            addObject(b,300,600);
-            addObject(t, 300,1);
-        
+            //Bottom
+            addObject(bottom,300,800);
             //Dot
             addDots();
+            //Top /Middle line
+            addObject(t, 300,201);
+            addObject(mid,300,600);
+            
         
         
-        
+            draw();
         /** Turn Ball*/
         
             ball.turn(-90);
-    
+           
+               
+            
 }//end constructor
+
+    /** ------------------------- Gettters--------------------*/
     //@returns level
     public static int getLevel()
     {
@@ -83,65 +99,54 @@ public class GameScreen extends World
     {
     return time;
     }//end getTime
-     public static void setTime(int settime)
-    {
-        time=settime;
-    }//end getTime
-     public void initializeNumDots()
-    {
-    if(level==1)
-        {
-        numDots =24;
-        }//end if 
-        else
-        {
-        numDots=48;
-        }//end else
     
-    }//end initializeNumDots
     
-    /**resets time */
-        public static void resetTime()
-    {
-        cal.clear();
-    }//resets calendar time
+
+    /** ----------------------  Void Methods ---------------------*/
     
-   public static void setNumDots(int num)
-    {
-        numDots=num;
-    }//end getNumDots method
     
-            /**Adds dots*/
+     /**Adds dots*/
     public void addDots()
     {
-        int dotX= 50, dotY=5;
+        int dotX= 50, dotY, newPlace;
+        if( level==1)
+        {
+            dotY=273;
+          newPlace=24;
         
+       }//END IF
+        else
+        {
+            dotY=225;
+            newPlace=18;
+        }//END ELSE 
+       
             for(int i=0; i< numDots;i++)
             {
             
-            Dot dots= new Dot();
+             dots.add(i, new Dot());
             
-            if(i<24)
+            if(i<newPlace)
             {
-                if(i%6==0)
+                if(i%6==0&&i!=0)
                 {
                     dotY+=73;
                     dotX=50;
                     
                     }//end inner if
                 
-                addObject(dots,dotX,dotY);
+                addObject(dots.get(i),dotX,dotY);
                 
             }//end outer if
             
             else
                 {
-                    if(i==24)
+                    if(i==newPlace)
                 {
-                     dotY=-10;
+                     dotY=175;
                     dotX=50;
                 }
-                if(i%6==0&& i!=24)
+                if(i%6==0&& i!=newPlace)
                 {
                     dotY-=73;
                     
@@ -149,7 +154,7 @@ public class GameScreen extends World
                     
                     }//end if
                 
-                addObject(dots,dotX,dotY);
+                addObject(dots.get(i),dotX,dotY);
                 
                 }//end else
             
@@ -158,14 +163,52 @@ public class GameScreen extends World
             }//end for loop
     
     }//end addDots
- 
-   
     
-  public void resizeBall()
-  {
+    public void draw()
+    {
+        GreenfootImage bLNT= new GreenfootImage( "Scroll Down", 130, Color.WHITE, Color.BLACK);
+         getBackground().drawImage(bLNT,10,20);
+         
+    }//end draw
+    
+    public void initializeNumDots()
+    {
+    if(level==1)
+        {
+        numDots =24;
+        
+        }//end if 
+        else
+        {
+        numDots=42;
+        }//end else
+    dots=new ArrayList(numDots);
+    }//end initializeNumDots
+    
+    /**resets time */
+        public static void resetTime()
+    {
+        cal.set(Calendar.SECOND, 0);
+        time=0;
+    }//resets calendar time
+    
+     public void resizeBall()
+     {
         GreenfootImage image = ball.getImage();
             image.scale(image.getWidth() - 40, image.getHeight() - 40);
             ball.setImage(image);
-  }//end resizeBall
- 
+     }//end resizeBall
+     
+    //@param int num
+   public static void setNumDots(int num)
+    {
+        numDots=num;
+    }//end getNumDots method
+    
+    //@param int setTime
+     public static void setTime(int setTime)
+    {
+        time=setTime;
+    }//end getTime
+     
 }//end class GameScreen
