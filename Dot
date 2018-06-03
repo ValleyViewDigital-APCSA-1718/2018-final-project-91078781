@@ -1,0 +1,57 @@
+import greenfoot.*;
+/**
+ *  Dot class
+ * Jaqueline Gomez
+ * CSA Period 5
+ *  Final Project
+ *  May 20,2018
+ */
+public class Dot extends Actor
+{
+    
+    public void act()
+    {
+
+        moveDot();
+        moveDot();
+        touchingMid();
+        touchingBall();
+       
+    } //end act
+    
+    public void callYouLose()
+    {
+        if(GameScreen.getNumDots()==0)
+        {
+        Greenfoot.setWorld(new YouWin());
+        }//end if
+       
+    }//end callYouLose
+    
+    public void moveDot()
+    {
+       if(GameScreen.getTime()%20==0&& GameScreen.getLevel()==2)
+        {
+            setLocation(getX(), getY()+3);
+          
+        }//end if
+    
+    }//end moveDot
+    
+    public void touchingBall()
+    {
+        if(this.isTouching(Ball.class)&&!(this.isTouching(Top.class)))
+        {
+        getWorld().removeObject(this);
+        GameScreen.setNumDots(GameScreen.getNumDots()-1);
+        }//end if
+    }//end touchingBall
+    
+    public void touchingMid()
+    {
+       if(this.isTouching(Middle.class))
+        {
+            Greenfoot.setWorld(new YouLose());
+        }//end if
+    }//end touchingMid
+ }// end Dot class
