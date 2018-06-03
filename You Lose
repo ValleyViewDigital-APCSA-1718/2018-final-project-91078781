@@ -1,0 +1,28 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+/**
+ * Screen shown when ball object touches bottom
+ *
+ *  Jaqueline Gomez
+ *  CSA Period 5
+ *  Final Project
+    May 20,2018
+ */
+public class YouLose extends Ask
+{
+    
+    public YouLose()
+    {
+        super();
+        if(againIsNo())
+        {
+            betterLuckNextTime();
+        }//end if
+        playAgain();
+    }//end YouLose constructor
+   
+   public void betterLuckNextTime()
+    {
+     GreenfootImage bLNT= new GreenfootImage("Better Luck Next Time", 50, Color.WHITE, Color.BLACK);
+     getBackground().drawImage(bLNT,100,500);
+    }/end betterLuckNextTime
+}//end class YouLose
