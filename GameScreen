@@ -26,7 +26,7 @@ public class GameScreen extends World
         }//end if
      cal= Calendar.getInstance();
       time= cal.get(Calendar.SECOND); 
-    }
+    }//end act method
     public GameScreen()
      {
         super(600,800,1);
@@ -67,7 +67,7 @@ public class GameScreen extends World
             //Dot
             addDots();
             //Top /Middle line
-            addObject(t, 300,201);
+            addObject(t, 300,159);
             addObject(mid,300,600);
             
         
